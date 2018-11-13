@@ -6,15 +6,18 @@ import os
 import json
 
 
+#Sentence pre-processing
 nlp = spacy.load('en_core_web_sm')
-test_sentence = "My fried Ane who cn;t jup ovr a wal"
+test_sentence = "Matthias cn't jump over the fenc"
 doc = nlp(test_sentence)
 tokens = [token.text for token in doc] #Tokenise
 pos_tags = [token.pos_ for token in doc] #POS tags
 token_tag = list(zip(tokens,pos_tags))
+
+print('\nThe test sentence is : {} \n'.format(test_sentence))
 print(f'The tokenized form of the sentence is as follows : \n{tokens}')
-print(f'The POS tags of the sentence are as follows : \n{pos_tags}')
-print('The (token,postag) tuples are : {}'.format(token_tag))
+print(f'The Part of Speech (POS) tags of the sentence are as follows : \n{pos_tags}')
+print('The (token,pos_tag) tuples are : {}'.format(token_tag))
 
 
 #using SpellChecker library in python
@@ -32,7 +35,7 @@ def spellchecker_test(list_tokens):
     for word in misspelled:
 
         #print the incorrect word
-        print(f'The incorrect word is "{word}"')
+        print(f'\nThe incorrect word is "{word}"')
 
         # Get the one `most likely` answer
         print(f'Using Spellchecker, the correction is : {spell.correction(word)}')
@@ -98,6 +101,7 @@ def symspell_test(tokenpos_list):
             print("input_term = {}, suggestion_term = {}, suggestion_count = {},suggestion_distance =  {}".format(w, suggestion.term, suggestion.count,
                                           suggestion.distance))
             suggestion_list.append(suggestion.term)
+    print("\n\nThe corrected sentence is : {}".format(' '.join(suggestion_list)))
     return suggestion_list, proper_noun
 
 if __name__ == "__main__":
@@ -106,20 +110,20 @@ if __name__ == "__main__":
     sym_result, proper_noun_list = symspell_test(token_tag)
 
     #Generating json format
-    print('\n{} \nGenerate json format using symspell results \n'.format('#'*20))
+    print('\n{} \nGenerate json format using \'Symspellpy\' results \n'.format('#'*20))
 
     corrected_sent = ' '.join(sym_result)
 
     #modifying original list of tokens to add possible repetitions
     correct_token_list = [(word,index) for (index,word) in enumerate(sym_result) if word != test_sentence.lower().split()[index] and word not in proper_noun_list]
-    print('correct token list is : {}\n'.format(correct_token_list))
+    print('The corrected tokens along with their original indices are : {}\n'.format(correct_token_list))
 
     test_sentence_copy = test_sentence.split()
-    flag = 0
+    offset = 0 #Offset inorder to account for shift in index after possible duplication of original incorrect tokens
     for (w,i) in correct_token_list:
         num_parts = len(nlp(w))
-        test_sentence_copy[i+flag : i+flag+1] = test_sentence_copy[i+flag : i+flag+1] * num_parts
-        flag += num_parts-1
+        test_sentence_copy[i+offset : i+offset+1] = test_sentence_copy[i+offset : i+offset+1] * num_parts
+        offset += num_parts-1
     print('The modified version of the original token list is : {} \n'.format(test_sentence_copy))
 
     #tokenising the corrected sentence and generating pos tags
@@ -133,4 +137,5 @@ if __name__ == "__main__":
         json_list.append({"token":new_sent_tokens[i], "pos":new_pos_tags[i], "raw":test_sentence_copy[i]})
 
     json_list = json.dumps(json_list)
-    print(json_list)
+    json_dict = {"tokens" : json_list }
+    print('The desired json output format is : {} '.format(json_dict))
