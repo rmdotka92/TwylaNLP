@@ -28,6 +28,7 @@ for word in misspelled:
     print(f'The candidate words for the correction of "{word}" is : ')
     print(spell.candidates(word))
 
+# Using textblob library in Python
 print('\n{} \nBegin \'textblob\' testing \n'.format('#'*20))
 
 tb = TextBlob("The fox cn't jump over a fence")
