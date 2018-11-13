@@ -1,0 +1,55 @@
+
+The test sentence is : Matthias cn't jump over the fenc 
+
+The tokenized form of the sentence is as follows : 
+['Matthias', "cn't", 'jump', 'over', 'the', 'fenc']
+The Part of Speech (POS) tags of the sentence are as follows : 
+['PROPN', 'VERB', 'VERB', 'ADP', 'DET', 'NOUN']
+The (token,pos_tag) tuples are : [('Matthias', 'PROPN'), ("cn't", 'VERB'), ('jump', 'VERB'), ('over', 'ADP'), ('the', 'DET'), ('fenc', 'NOUN')]
+
+#################### 
+Begin 'SpellChecker' testing 
+
+
+The incorrect word is "Matthias"
+Using Spellchecker, the correction is : matthias
+The candidate words for the correction of "Matthias" is : 
+{'matthias'}
+
+The incorrect word is "fenc"
+Using Spellchecker, the correction is : fence
+The candidate words for the correction of "fenc" is : 
+{'enc', 'flnc', 'fec', 'febc', 'feng', 'fens', 'fenn', 'fence', 'fend', 'fen'}
+
+The incorrect word is "cn't"
+Using Spellchecker, the correction is : n't
+The candidate words for the correction of "cn't" is : 
+{'cnut', "can't", 'cnt', "n't", 'cnet'}
+
+#################### 
+Begin 'textblob' testing 
+
+The attempted correction by "Textblob" is : Matthias in't jump over the fence
+
+#################### 
+Begin 'Symspellpy' testing 
+
+input_term = cn't, suggestion_term = can't, suggestion_count = 300000,suggestion_distance =  1
+input_term = jump, suggestion_term = jump, suggestion_count = 44137441,suggestion_distance =  0
+input_term = over, suggestion_term = over, suggestion_count = 459222855,suggestion_distance =  0
+input_term = the, suggestion_term = the, suggestion_count = 23135851162,suggestion_distance =  0
+input_term = fenc, suggestion_term = fence, suggestion_count = 6796605,suggestion_distance =  1
+
+
+The corrected sentence is : Matthias can't jump over the fence
+
+#################### 
+Generate json format using 'Symspellpy' results 
+
+The corrected tokens along with their original indices are : [("can't", 1), ('fence', 5)]
+
+The modified version of the original token list is : ['Matthias', "cn't", "cn't", 'jump', 'over', 'the', 'fenc'] 
+
+New sentence tokens are : ['Matthias', 'ca', "n't", 'jump', 'over', 'the', 'fence'] 
+
+The desired json output format is : {'tokens': '[{"token": "Matthias", "pos": "PROPN", "raw": "Matthias"}, {"token": "ca", "pos": "VERB", "raw": "cn\'t"}, {"token": "n\'t", "pos": "ADV", "raw": "cn\'t"}, {"token": "jump", "pos": "VERB", "raw": "jump"}, {"token": "over", "pos": "ADP", "raw": "over"}, {"token": "the", "pos": "DET", "raw": "the"}, {"token": "fence", "pos": "NOUN", "raw": "fenc"}]'} 
