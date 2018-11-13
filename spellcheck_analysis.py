@@ -78,16 +78,32 @@ if __name__ == "__main__":
     symspelltest()
 
 #Generating json format
+
 print('\n{} \nGenerate json format \n'.format('#'*20))
 
 corrected_sent = symspelltest()
+
+#modifying original list of tokens to add possible repetitions
+correct_token_list = [(word,index) for (index,word) in enumerate(corrected_sent.split()) if word != test_sentence.lower().split()[index]]
+print('correct token list is : {}'.format(correct_token_list))
+
+test_sentence_copy = test_sentence.split()
+flag = 0
+for (w,i) in correct_token_list:
+    num_parts = len(nlp(w))
+    test_sentence_copy[i+flag : i+flag+1] = test_sentence_copy[i+flag : i+flag+1] * num_parts
+    flag += num_parts-1
+print('The modified token list is : {}'.format(test_sentence_copy))
+
+#tokenising the corrected sentence and generating pos tags
 new_sent = nlp(corrected_sent)
 new_sent_tokens = [w.text for w in new_sent]
+print("new sentence tokens are : {}".format(new_sent_tokens))
 pos_tags = [w.pos_ for w in new_sent]
 
 json_list = []
-for i in range(len(tokens)):
-    json_list.append({"token":new_sent_tokens[i], "pos":pos_tags[i], "raw":tokens[i]})
+for i in range(len(new_sent_tokens)):
+    json_list.append({"token":new_sent_tokens[i], "pos":pos_tags[i], "raw":test_sentence_copy[i]})
 
 json_list = json.dumps(json_list)
 print(json_list)
