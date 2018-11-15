@@ -68,8 +68,9 @@ Additionally I would suggest using a rest-client like [*postman*](https://www.ge
 
 This is not mandatory since the RESTful-api endpoints can be accessed via terminal. The commands are explained below.
 
-### Installing
+### Installing dependencies
 
+#### Step 1.
 The dependencies are mentioned in the 'requirements.txt' file.
 You can install the dependenicies in your virtual environment using the following command.
 ```
@@ -85,6 +86,7 @@ python main.py
 
 __PS__ : It is okay to see some warnings. These are caused due to incompatibility issues between Spacy (written in Cython) and the interpreter.
 
+#### Step 2.
 Open another instance of the terminal (not necessarily in admin mode) and pass on the following commands to GET a json response or POST an input.
 
 **GET**:
