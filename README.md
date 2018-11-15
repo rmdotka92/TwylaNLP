@@ -91,7 +91,7 @@ Open another instance of the terminal (not necessarily in admin mode) and pass o
 
 **GET**:
 ```
-curl
+curl localhost:5000/tokenise
 ```
 
 This yields an output as shown.
