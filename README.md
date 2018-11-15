@@ -157,7 +157,7 @@ Run the following command to generate the test results.
 python -m pytest -v
 ```
 
-Additionally, a 'main_logger.txt' is included to log everytime an error occurs. When incorrect input formats are encountered by the RESTful-api, custom error-codes and response messages are generated to help in debugging.
+Additionally, a 'main_logger.log' is included to log everytime an error occurs. When incorrect input formats are encountered by the RESTful-api, custom error-codes and response messages are generated to help in debugging.
 
 ### Break down into end to end tests
 
