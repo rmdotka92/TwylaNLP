@@ -63,22 +63,30 @@ Additionally I would suggest using a rest-client like [*postman*](https://www.ge
 
 ### Installing
 
+The dependencies are mentioned in the 'requirements.txt' file.
+You can install the dependenicies using the following command from your virtual environment.
+```
+pip install -r path/to/requirements.txt
+```
+Now you are good to go.
+You can run the main.py file.
 
 ```
-Give the example
+python main.py
+```
+Open another instance of the command prompt and pass on the following commands to GET a json response or POST an input.
+
+POST:
+```
+curl localhost:5000/tokenise -d "{\"input\":\"The dog cn't jump over Jacob\"}" -H 'Content-Type: application/json'
 ```
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+```
+
+```
 
 ### Break down into end to end tests
 
