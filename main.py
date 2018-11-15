@@ -16,16 +16,14 @@ You can read more about them here:
 """
 
 import os
-import json
-import sys
 import logging
 from flask import Flask, make_response, request, jsonify
 from flask_restful import Resource, Api
-import enchant
+# import enchant
 import spacy
 from symspellpy.symspellpy import SymSpell, Verbosity
 
-DEFAULT = 1 #1/0 :Enchant spell-checker/Symspell spell-checker
+DEFAULT = 0 #1/0 :Enchant spell-checker/Symspell spell-checker
 logging.basicConfig(filename = 'main_logger.log', level=logging.WARNING)
 nlp = spacy.load('en_core_web_sm') #Spacy English library
 

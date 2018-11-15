@@ -51,17 +51,17 @@ def test_symspell_test_notlistoftups():
     expected = 410
     assert case == expected
 
-def test_enchant_check_suggestions():
-    case,_ = main.enchant_check(
-    [('Boxer', 'PROPN'), ('and', 'CCONJ'), ('the', 'DET'), ('dog', 'NOUN'),
-     ("cn't", 'VERB'), ('jump', 'VERB'), ('over', 'ADP'), ('the', 'DET'),
-      ('fenc', 'NOUN')]
-    )
-    expected = ['Boxer', 'and', 'the', 'dog', "can't", 'jump', 'over', 'the', 'enc']
-    assert case == expected
-
-def test_enchant_check_notlistoftups():
-    # Example : Boxer and the dog cn't jump over the fenc
-    case = main.enchant_check("Boxer and the dog cn't jump over the fenc")
-    expected = 410
-    assert case == expected
+# def test_enchant_check_suggestions():
+#     case,_ = main.enchant_check(
+#     [('Boxer', 'PROPN'), ('and', 'CCONJ'), ('the', 'DET'), ('dog', 'NOUN'),
+#      ("cn't", 'VERB'), ('jump', 'VERB'), ('over', 'ADP'), ('the', 'DET'),
+#       ('fenc', 'NOUN')]
+#     )
+#     expected = ['Boxer', 'and', 'the', 'dog', "can't", 'jump', 'over', 'the', 'enc']
+#     assert case == expected
+#
+# def test_enchant_check_notlistoftups():
+#     # Example : Boxer and the dog cn't jump over the fenc
+#     case = main.enchant_check("Boxer and the dog cn't jump over the fenc")
+#     expected = 410
+#     assert case == expected
