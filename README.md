@@ -46,8 +46,8 @@ For the sake of ease, commands to get spacy up and running are given below. You 
 
 The commands to install spacy (alongwith the english library) on python version 3x for virtual env on **windows** are:
 ```
-python -m pip install -U venv
-python -m venv .env
+python -m pip install -U virtualenv
+python -m virtualenv .env
 .env\Scripts\activate
 pip install -U spacy
 python -m spacy download en
