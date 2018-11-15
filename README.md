@@ -36,11 +36,15 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 In order to run this on your system, you need to have *python 3.6* installed on your system. You can download python from the [official site](https://www.python.org/downloads/) and follow the instructions to install on your PC.
 
+#### Step 1.
+**Important** : Open terminal in administrator mode. This is mandatory to enable linking between spacy and it's english library.
+
+#### Step 2.
 Since we use the *spacy* library for pre-processing the text data, it is mandatory that you install the spacy english library from the [spacy website](https://spacy.io/usage/).
 
 For the sake of ease, commands to get spacy up and running are given below. You can refer to the spacy website for further details.
 
-The commands to install spacy (alongwith the english library) on python version 3x for virtual env on windows are:
+The commands to install spacy (alongwith the english library) on python version 3x for virtual env on **windows** are:
 ```
 python -m pip install -U venv
 python -m venv .env
@@ -49,7 +53,7 @@ pip install -U spacy
 python -m spacy download en
 ```
 
-The commands to install spacy (alongwith the english library) on python version 3x for virtual env on linux are:
+The commands to install spacy (alongwith the english library) on python version 3x for virtual env on **linux** are:
 ```
 python -m pip install -U venv
 python -m venv .env
@@ -58,35 +62,100 @@ pip install -U spacy
 python -m spacy download en
 ```
 
-Recommended:
+#### Step 3. (Optional)
+
 Additionally I would suggest using a rest-client like [*postman*](https://www.getpostman.com/) or [*insomnia*](https://insomnia.rest/) to easily preview the code response for different inputs.
+
+This is not mandatory since the RESTful-api endpoints can be accessed via terminal. The commands are explained below.
 
 ### Installing
 
 The dependencies are mentioned in the 'requirements.txt' file.
-You can install the dependenicies using the following command from your virtual environment.
+You can install the dependenicies in your virtual environment using the following command.
 ```
 pip install -r path/to/requirements.txt
 ```
+
 Now you are good to go.
-You can run the main.py file.
+You can run the 'main.py' file.
 
 ```
 python main.py
 ```
-Open another instance of the command prompt and pass on the following commands to GET a json response or POST an input.
 
-POST:
+__PS__ : It is okay to see some warnings. These are caused due to incompatibility issues between Spacy (written in Cython) and the interpreter.
+
+Open another instance of the terminal (not necessarily in admin mode) and pass on the following commands to GET a json response or POST an input.
+
+**GET**:
 ```
-curl localhost:5000/tokenise -d "{\"input\":\"The dog cn't jump over Jacob\"}" -H 'Content-Type: application/json'
+curl
 ```
 
+This yields an output as shown.
+```
+{
+    "tokens": ""
+}
+```
+
+**POST**:
+
+For Windows:
+
+```
+curl localhost:5000/tokenise -d "{\"input\":\"The dog cn't jump\"}" -H 'Content-Type: application/json'
+```
+
+For Linux:
+
+```
+curl localhost:5000/tokenise -d "{"input":"The dog cn't jump"}" -H 'Content-Type: application/json'
+```
+
+This yields an output as shown.
+```
+{
+    "tokens": [
+        {
+            "token": "The",
+            "pos": "DET",
+            "raw": "The"
+        },
+        {
+            "token": "dog",
+            "pos": "NOUN",
+            "raw": "dog"
+        },
+        {
+            "token": "ca",
+            "pos": "VERB",
+            "raw": "cn't"
+        },
+        {
+            "token": "n't",
+            "pos": "ADV",
+            "raw": "cn't"
+        },
+        {
+            "token": "jump",
+            "pos": "VERB",
+            "raw": "jump"
+        }
+    ]
+}
+```
 
 ## Running the tests
 
-```
+In order to run the tests, you need to have pytest installed in your virtual environment.
+Run the following command to generate the test results.
 
 ```
+python -m pytest -v
+```
+
+Additionally, a 'main_logger.txt' is included to log everytime an error occurs. When incorrect input formats are encountered by the RESTful-api, custom error-codes and response messages are generated to help in debugging.
 
 ### Break down into end to end tests
 
@@ -95,8 +164,6 @@ Explain what these tests test and why
 ```
 Give an example
 ```
-## Built With
-
 
 ## Authors
 
