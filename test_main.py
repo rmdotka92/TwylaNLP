@@ -1,27 +1,24 @@
 """
 Unit tests for main.py
-Run with:
-$ py.test -f test_sorter.py -v
-"""
-import sys
-import main
-import pytest
 
+"""
+import pytest
+import main
 
 # @pytest.mark.skipif(sys.version_info < (3,0) ,reason = 'Not tested to run on python versions < 3.0')
 def test_pre_processing_tokens():
-    case, _, dummy = main.pre_processing('I love to eat apples')
-    expected = ['I', 'love', 'to', 'eat', 'apples']
+    case, _, dummy, token_case = main.pre_processing('I love to eat apples')
+    expected = ['i', 'love', 'to', 'eat', 'apples']
     assert case == expected
 
 def test_pre_processing_postags():
-    _, case, dummy = main.pre_processing('I love to eat apples')
+    _, case, dummy, token_case = main.pre_processing('I love to eat apples')
     expected = ['PRON', 'VERB', 'PART', 'VERB', 'NOUN']
     assert case == expected
 
 def test_pre_processing_tokenpostags():
-    _, dummy, case = main.pre_processing('I love to eat apples')
-    expected = [('I', 'PRON'), ('love', 'VERB'), ('to', 'PART'), ('eat', 'VERB'),('apples', 'NOUN')]
+    _, dummy, case, token_case = main.pre_processing('I love to eat apples')
+    expected = [('i', 'PRON'), ('love', 'VERB'), ('to', 'PART'), ('eat', 'VERB'),('apples', 'NOUN')]
     assert case == expected
 
 def test_pre_processing_notstring():
