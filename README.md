@@ -129,6 +129,8 @@ This yields an output as shown.
 ```
 You need to manually stop the code-run in the initial terminal when required.
 
+__PS__ : The character max-limit is set to 100 per POST request.
+
 ## Running the tests
 
 In order to run the tests, you need to have '[pytest](https://docs.pytest.org/en/latest/)' installed in your virtual environment.
@@ -178,6 +180,18 @@ import enchant
 ```
 The code should run fine.
 
+### SUCCESS CASES
+- Successfully corrects (upto a certain degree of accuracy) sentences with proper nouns, apostrophes and single-letter words like I,a.
+- Successfully mirrors the case of the first alphabet of the word in the output (**Appl** --> **Apple** but **APPL** --> **apple**). 
+
+This is because the spell-checking algorithms are case-sensitive. Hence it is necessary that the token-cases are set to lowercase before processing and set back to the original state at the output.
+
+### FAILURE CASES
+- Fails to detect punctuation. (Seems tricky. Need more time.)
+- Fails to mirror the exact case.
+- Fails to make context-based corrections.
+
+
 ## Authors
 
 **Rahul Dharamdasani (Me)** - [GitHub](https://github.com/rmdotka92) and [LinkedIn](https://www.linkedin.com/in/rahulmd92/)
@@ -188,4 +202,6 @@ The code should run fine.
 2. [SymSpell spelling-corrector library](https://github.com/wolfgarbe/SymSpell) - Best maintained spell-checking library with multiple added features.
 3. [PyEnchant spelling-corrector](https://github.com/rfk/pyenchant) - Was widely used but is no longer maintained.
 4. [Textblob](https://textblob.readthedocs.io/en/dev/quickstart.html#spelling-correction) - Provides a spell-correction feature. Well known for it's sentiment prediction module. Not scalable.
-5. [JamSpell spelling-corrector](https://github.com/bakwc/JamSpell#python)
+5. [Pyspellchecker](https://github.com/barrust/pyspellchecker)
+6. [JamSpell spelling-corrector](https://github.com/bakwc/JamSpell#python)
+
