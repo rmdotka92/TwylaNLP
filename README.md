@@ -25,6 +25,8 @@ The RESTful service was generated using the [flask-restful](https://flask-restfu
 In order to determine which spell-checking solution to use, analysis was carried out using 5 different open-source libraries.
 The [symspellpy](https://github.com/wolfgarbe/SymSpell/blob/master/README.md) [v6.3](https://github.com/mammothb/symspellpy) and [pyenchant](https://github.com/rfk/pyenchant) libraries were determined to be best suited for the task.
 
+__PS__: I have included all necessary instructions, commands and links in this readme file. 
+
 ## Getting Started (Takes approx. 10 minutes)
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
@@ -61,7 +63,7 @@ python -m spacy download en
 
 Additionally I would suggest using a rest-client like [*postman*](https://www.getpostman.com/) or [*insomnia*](https://insomnia.rest/) to easily preview the code response for different inputs.
 
-This is not mandatory since the RESTful-api endpoints can be accessed via terminal. The commands are explained below.
+This is not mandatory since the RESTful-api endpoints can be accessed via terminal. The commands are included below.
 
 ### Installing dependencies
 
@@ -82,7 +84,7 @@ You can run the 'main.py' file.
 python main.py
 ```
 
-__PS__ : It is okay to see some warnings. These are caused due to incompatibility issues between Spacy (written in Cython) and the interpreter.
+__PS__ : It is okay to see some warnings. These are caused due to incompatibility issues between Spacy (written in Cython) and the interpreter. Once the warnings stop popping on your terminal, you can move on to the next step.
 
 ### Step 2.
 Open **another instance** of the terminal (admin mode not required) and pass on the following commands to GET a json response or POST a json input.
@@ -142,21 +144,21 @@ Run the following command to generate the test results.
 python -m pytest -v
 ```
 
+Additionally, code coverage report can be generated using the following line of code (requires 'pytest-cov' to be installed).
+```
+python -m pytest --cov -v
+```
+
 Here's a how the test-result looks like:
 
 Inline-style: 
 ![alt text](https://github.com/rmdotka92/TwylaNLP/blob/master/tests/test_coverage_report.jpg "Test and coverage report")
 
-This can be generated using the following line of code.
-```
-python -m pytest --cov -v
-```
-
-Additionally, a 'main_logger.log' is included to log every warning/error occurs. When incorrect input formats are encountered by the RESTful-api, custom error-codes and response messages are generated to help in debugging.
+A 'main_logger.log' is included to log every warning/error that occurs. When incorrect input formats are encountered by the RESTful-api, custom error-codes and response messages are generated to help in debugging.
 
 ### Summary of the tests
 
-Tests are designed to account for proper functioning and proper error responses of different modules. Additionally, 2 integration tests are run to check how different modules interact with each other. There are 3 important modules, namely
+Tests are designed to account for proper functioning and proper error responses of different modules. Additionally, 2 integration tests are run to check how different modules interact with each other. There are 3 important modules, namely,
 
 1. pre-processing
 2. dictionary (sym-spellpy or enchant)
