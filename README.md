@@ -160,7 +160,7 @@ Tests are designed to account for proper functioning and proper error responses 
 2. dictionary (sym-spellpy or enchant)
 3. post-processing
 
-Each of these modules are tested individually and in conjunction with each other.
+Each of these modules are tested individually and in conjunction with each other. Test reports and code-coverage reports can be found in the *test* directory.
 
 ## Description of the spelling library used, success and failure cases (optional)
 
