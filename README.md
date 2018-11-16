@@ -108,13 +108,13 @@ The example used here is : "The dog c'nt jump". Please note that the code takes 
 For Windows:
 
 ```
-curl localhost:5000/tokenise -d "{\"input\":\"The dog cn't jump\"}" -H 'Content-Type: application/json'
+curl localhost:5000/tokenise -d "{\"input\":\"The dog cn't jump\"}" -H 'Content-Type:application/json'
 ```
 
 For Linux:
 
 ```
-curl localhost:5000/tokenise -d "{"input":"The dog cn't jump"}" -H 'Content-Type: application/json'
+curl localhost:5000/tokenise -d "{"input":"The dog cn't jump"}" -H 'Content-Type:application/json'
 ```
 
 This yields an output as shown.
@@ -127,12 +127,6 @@ This yields an output as shown.
                {"token": "jump", "pos": "VERB", "raw": "jump"}]
 }
 ```
-__PS__ : A warning might occur. I am unsure how to fix this and will update this ASAP when a fix is found. You can make as many queries as desired and the warning does not affect the running of this code.
-
-```
-curl: (6) Could not resolve host: application
-```
-
 You need to manually stop the code-run in the initial terminal when required.
 
 ## Running the tests
