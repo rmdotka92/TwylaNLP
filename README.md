@@ -15,14 +15,9 @@ The service generates a correction suggestion with the following format:
 
 ```
 {
-  "tokens" : [
-
-                {"token" : "(possibly) corrected token", "pos" : part-of-speech tag, "raw" : original token}
-                                                           .
-                                                           .
-                {"token" : "(possibly) corrected token", "pos" : part-of-speech tag, "raw" : original token}
-
-             ] 
+  "tokens" : [{"token" : "(possibly) corrected token", "pos" : part-of-speech tag, "raw" : original token}
+                                                         .
+              {"token" : "(possibly) corrected token", "pos" : part-of-speech tag, "raw" : original token}]
 }
 ```
 
@@ -123,42 +118,20 @@ curl localhost:5000/tokenise -d "{"input":"The dog cn't jump"}" -H 'Content-Type
 This yields an output as shown.
 ```
 {
-    "tokens": [
-        {
-            "token": "The",
-            "pos": "DET",
-            "raw": "The"
-        },
-        {
-            "token": "dog",
-            "pos": "NOUN",
-            "raw": "dog"
-        },
-        {
-            "token": "ca",
-            "pos": "VERB",
-            "raw": "cn't"
-        },
-        {
-            "token": "n't",
-            "pos": "ADV",
-            "raw": "cn't"
-        },
-        {
-            "token": "jump",
-            "pos": "VERB",
-            "raw": "jump"
-        }
-    ]
+    "tokens": [{"token": "The", "pos": "DET", "raw": "The"},
+               {"token": "dog", "pos": "NOUN", "raw": "dog"},
+               {"token": "ca", "pos": "VERB", "raw": "cn't"},
+               {"token": "n't", "pos": "ADV", "raw": "cn't"},
+               {"token": "jump", "pos": "VERB", "raw": "jump"}]
 }
 ```
 __PS__ : A warning might occur. I am unsure how to fix this and will update this ASAP when a fix is found. You can make as many queries as desired and the warning does not affect the running of this code.
 
-You need to manually stop the code-run in the initial terminal when required.
-
 ```
 curl: (6) Could not resolve host: application
 ```
+
+You need to manually stop the code-run in the initial terminal when required.
 
 ## Running the tests
 
@@ -169,15 +142,45 @@ Run the following command to generate the test results.
 python -m pytest -v
 ```
 
+Here's a how the test-result looks like:
+
+Inline-style: 
+![alt text](https://github.com/rmdotka92/TwylaNLP/blob/master/tests/test_coverage_report.jpg "Test and coverage report")
+
+This can be generated using the following line of code.
+```
+python -m pytest --cov -v
+```
+
 Additionally, a 'main_logger.log' is included to log every warning/error occurs. When incorrect input formats are encountered by the RESTful-api, custom error-codes and response messages are generated to help in debugging.
 
-### Break down the tests
+### Summary of the tests
 
-Tests are generated in order to  
+Tests are designed to account for proper functioning and proper error responses of different modules. Additionally, 2 integration tests are run to check how different modules interact with each other. There are 3 important modules, namely
+
+1. pre-processing
+2. dictionary (sym-spellpy or enchant)
+3. post-processing
+
+Each of these modules are tested individually and in conjunction with each other.
+
+## Description of the spelling library used, success and failure cases (optional)
+
+The spelling library used here is SymSpell. The reason for choosing this is because it seemed to give decent results, is widely popular, is constantly being updated by it's creator and the python NLP community and has shown impressive results in comparison to other spell-checking/correction libraries.
+
+Almost all spell-checking libraries are based on Peter Norvig's blog (see References). The blog explains how to generate possible spell-checks based on *edit-distance*. SymSpell is **word-frequency based** and not a **context-based** spell-checking library. Note that in my implementation, the response is generated after 8-10 seconds. This is because I looped over each token in order to disable spell-checking on Proper Nouns and on words smaller than 2 characters. Without these forced conditions, the library would try to correct names and change the alphabet 'I' to 'a'. This would change a sentence like **'Rahul and I are good frinds'** to **'Paul and a are good friends'**. Each time a token is tested, a reference dictionary is built from the existing corpus list and this leads to added run-time. 
+
+Pyenchant is another decent library. It does the job fast and does manage to produce good results. Unfortunately, it is no longer maintained. It has also been observed that it does not install well on 64-bit OS. I have included the code in my 'main.py' file. In case, pyenchant can be installed on your PC after running the following command,
 
 ```
-Give an example
+pip install pyenchant
 ```
+you can add the following line to the main.py file and set the variable **DEFAULT = 0** in both, 'main.py' and 'test_main.py'.
+
+```
+import enchant
+```
+The code should run fine.
 
 ## Authors
 
