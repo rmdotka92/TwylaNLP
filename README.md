@@ -129,7 +129,7 @@ This yields an output as shown.
 ```
 You need to manually stop the code-run in the initial terminal when required.
 
-__PS__ : The character max-limit is set to 100 per POST request.
+__PS__ : The character max-limit is set to 100 characters per POST request.
 
 ## Running the tests
 
@@ -148,7 +148,7 @@ python -m pytest --cov -v
 Here's a how the test-result looks like:
 
 Inline-style: 
-![alt text](https://github.com/rmdotka92/TwylaNLP/blob/master/tests/test_coverage_report.jpg "Test and coverage report")
+![alt text](https://github.com/rmdotka92/TwylaNLP/blob/master/tests/test_coverage_report_3.jpg "Test and coverage report")
 
 A 'main_logger.log' is included to log every warning/error that occurs. When incorrect input formats are encountered by the RESTful-api, custom error-codes and response messages are generated to help in debugging.
 
@@ -160,7 +160,7 @@ Tests are designed to account for proper functioning and proper error responses 
 2. dictionary (sym-spellpy or enchant)
 3. post-processing
 
-Each of these modules are tested individually and in conjunction with each other.
+Each of these modules are tested individually and in conjunction with each other. Test reports and code-coverage reports can be found in the *test* directory.
 
 ## Description of the spelling library used, success and failure cases (optional)
 
@@ -181,7 +181,7 @@ import enchant
 The code should run fine.
 
 ### SUCCESS CASES
-- Successfully corrects (upto a certain degree of accuracy) sentences with proper nouns, apostrophes and single-letter words like I,a.
+- Successfully corrects (upto a certain degree of accuracy) sentences with proper nouns, apostrophes and single-letter words like I, a.
 - Successfully mirrors the case of the first alphabet of the word in the output (**Appl** --> **Apple** but **APPL** --> **apple**). 
 
 This is because the spell-checking algorithms are case-sensitive. Hence it is necessary that the token-cases are set to lowercase before processing and set back to the original state at the output.
