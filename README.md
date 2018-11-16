@@ -187,7 +187,7 @@ The code should run fine.
 This is because the spell-checking algorithms are case-sensitive. Hence it is necessary that the token-cases are set to lowercase before processing and set back to the original state at the output.
 
 ### FAILURE CASES
-- Fails to detect punctuation. (Seems tricky. Need more time.)
+- Fails to detect punctuation.
 - Fails to mirror the exact case.
 - Fails to make context-based corrections.
 
