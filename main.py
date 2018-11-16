@@ -145,7 +145,7 @@ def post_processing(sentence: str)->list:
 
         #modifying original list of tokens to add possible repetitions
         correct_token_list = [(word, index) for (index, word) in enumerate(suggested_tokens)
-         if word != sentence.lower().split()[index]
+         if word != tokens[index]
          and word not in intact_words_list]
         original_tokens = tokens  #Make a copy of the original list of tokens
         offset = 0 #Offset to account for shift in index after possible duplication of original incorrect tokens
