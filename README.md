@@ -68,7 +68,7 @@ This is not mandatory since the RESTful-api endpoints can be accessed via termin
 ### Installing dependencies
 
 The dependencies are mentioned in the 'requirements.txt' file.
-You can install the dependenicies in your virtual environment using the following command.
+You can install the dependencies in your virtual environment using the following command.
 ```
 pip install -r path/to/requirements.txt
 ```
